@@ -1,0 +1,9 @@
+{
+  "friends": [
+    { "id": 1, "name": "Ross", "age": "30" },
+    { "id": 2, "name": "Chandler", "age": "50" },
+    { "id": 3, "name": "Monica", "age": "40" }
+  ],
+  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
+  "profile": { "name": "typicode" }
+}
