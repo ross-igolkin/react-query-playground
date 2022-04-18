@@ -1,26 +1,14 @@
-import { useQuery } from "react-query";
 import FriendItem from "../components/FriendItem";
 import { Friend } from "../types";
 import List from "@mui/material/List";
 import { Outlet } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { setIsFetching } from "uiSlice";
 import Skeleton from "@mui/material/Skeleton";
 import ListItemButton from "@mui/material/ListItemButton";
-import Client from "services/Client";
+import useFindAll from "services/useFindAll";
 
 export default function Posts() {
-  const { data, isLoading, isFetching, error, isError } = useQuery<
-    Friend[],
-    Error
-  >("friends", () => Client.findAll("friends"), {});
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setIsFetching(isFetching && !isLoading));
-  }, [dispatch, isFetching, isLoading]);
+  const { data, isError, isLoading, error } = useFindAll<Friend>("friends");
 
   if (isError) {
     return <div>{error.message}</div>;
