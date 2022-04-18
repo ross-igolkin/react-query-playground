@@ -1,9 +1,12 @@
 {
   "friends": [
-    { "id": 1, "name": "Ross", "age": "30" },
-    { "id": 2, "name": "Chandler", "age": "50" },
-    { "id": 3, "name": "Monica", "age": "40" }
+    { "id": "1", "name": "Ross", "age": "30", "usernameId": "1" },
+    { "id": "2", "name": "Chandler", "age": "50", "usernameId": "2" },
+    { "id": "3", "name": "Monica", "age": "40", "usernameId": "3" }
   ],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" }
+  "users": [
+    { "id": "1", "username": "rossTheBoss" },
+    { "id": "2", "username": "chandlerBing" },
+    { "id": "3", "username": "monicaLewinsky" }
+  ]
 }

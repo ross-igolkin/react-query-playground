@@ -1,7 +1,10 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Posts from "./pages/Friends";
+import Friends from "./pages/Friends";
+import CssBaseline from "@mui/material/CssBaseline";
+import AppBar from "components/AppBar";
+import FriendDetails from "components/FriendDetails";
 
 function App() {
   const queryClient = new QueryClient();
@@ -9,13 +12,13 @@ function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/posts">Posts</Link>
-        </nav>
+        <CssBaseline />
+        <AppBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="posts" element={<Posts />} />
+          <Route path="friends" element={<Friends />}>
+            <Route path=":friendId" element={<FriendDetails />} />
+          </Route>
         </Routes>
       </QueryClientProvider>
     </BrowserRouter>
