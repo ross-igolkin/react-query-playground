@@ -5,17 +5,13 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Link as RouterLink } from "react-router-dom";
-import { useQueryClient } from "react-query";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
 
 export default function AppBar() {
-  const res = useQueryClient();
+  const isFetching = useSelector((state: RootState) => state.ui.isFetching);
+  //const isFetching = useIsFetching();
 
-  useEffect(() => {
-    console.log(res);
-  }, [res]);
-
-  console.log(res);
   return (
     <MuiAppBar position="sticky" elevation={0}>
       <Toolbar>
@@ -31,7 +27,11 @@ export default function AppBar() {
           </Button>
         </Stack>
       </Toolbar>
-      <LinearProgress variant="determinate" value={90} />
+      {isFetching && (
+        <LinearProgress
+          sx={{ position: "absolute", top: 0, left: 0, right: 0 }}
+        />
+      )}
     </MuiAppBar>
   );
 }

@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,7 +16,7 @@ export default function FriendItem({ id, name }: Friend) {
         navigate(`/friends/${id}`);
       }}
     >
-      {name}
+      <Typography variant="body2">{name}</Typography>
     </ListItemButton>
   );
 }
