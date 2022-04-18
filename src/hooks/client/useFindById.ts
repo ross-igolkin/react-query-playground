@@ -2,10 +2,11 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
+import Client from "services/Client";
+import { ClientUrl } from "types";
 import { setIsFetching } from "uiSlice";
-import Client from "./Client";
 
-export default function useFindById <T>(path: string, id: string) {
+export default function useFindById <T>(path: ClientUrl, id: string) {
 
     const query = useQuery<
     T,

@@ -5,9 +5,27 @@ import Friends from "./pages/Friends";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "components/AppBar";
 import FriendDetails from "components/FriendDetails";
+import { apiClient } from "services/Client";
+import { useEffect } from "react";
 
 function App() {
   const queryClient = new QueryClient();
+
+  useEffect(() => {
+    apiClient.interceptors.request.use(
+      (config) => {
+        const user = { token: "dfgdffddfdgdf" };
+        config.headers = {
+          Authorization: user?.token,
+        };
+        return config;
+      },
+      (error) => {
+        alert();
+        return Promise.reject(error);
+      }
+    );
+  }, []);
 
   return (
     <BrowserRouter>

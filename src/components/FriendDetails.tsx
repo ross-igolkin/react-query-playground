@@ -1,7 +1,7 @@
 import { Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
+import { useFindById } from "hooks";
 import { useParams } from "react-router-dom";
-import useFindById from "services/useFindById";
 import { Friend } from "types";
 
 export default function FriendDetails() {

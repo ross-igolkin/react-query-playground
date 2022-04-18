@@ -1,11 +1,11 @@
 import FriendItem from "../components/FriendItem";
-import { Friend } from "../types";
+import { Friend } from "types";
 import List from "@mui/material/List";
 import { Outlet } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 import ListItemButton from "@mui/material/ListItemButton";
-import useFindAll from "services/useFindAll";
+import { useFindAll } from "hooks";
 
 export default function Posts() {
   const { data, isError, isLoading, error } = useFindAll<Friend>("friends");

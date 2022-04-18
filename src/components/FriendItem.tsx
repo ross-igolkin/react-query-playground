@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Friend } from "../types";
+import { Friend } from "types";
 
 export default function FriendItem({ id, name }: Friend) {
   const { friendId } = useParams();
