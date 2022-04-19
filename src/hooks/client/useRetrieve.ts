@@ -2,17 +2,17 @@
 import { useEffect } from "react";
 import {  useQuery } from "react-query";
 import { useDispatch } from "react-redux";
-import {  UseClientProps } from "types";
+import { UseDynamicClientProps } from "types";
 import { setIsFetching } from "uiSlice";
 import Client from "../../services/Client";
 
 
-export default function useFindAll <T>({path, options = {}}:Omit<UseClientProps<T>, 'id'>) {
+export default function useRetrieve <T>({path, options = {}}:Omit<UseDynamicClientProps<T>, 'id'>) {
 
     const query = useQuery<
-    T[],
+    T,
     Error
-  >(path, () => Client.findAll(path),options);
+  >(path, () => Client.retrieve(path),options);
   const dispatch = useDispatch();
 
   useEffect(() => {

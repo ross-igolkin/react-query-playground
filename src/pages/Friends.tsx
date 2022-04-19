@@ -8,7 +8,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import { useFindAll } from "hooks";
 
 export default function Posts() {
-  const { data, isError, isLoading, error } = useFindAll<Friend>("friends");
+  const { data, isError, isLoading, error } = useFindAll<Friend>({
+    path: "friends",
+  });
 
   if (isError) {
     return <div>{error.message}</div>;

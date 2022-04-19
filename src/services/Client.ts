@@ -11,6 +11,12 @@ const findAll = async <T>(path: string) => {
   const response = await apiClient.get<T[]>(`/${path}`);
   return response.data;
 }
+
+const retrieve = async <T>(path: string) => {
+  const response = await apiClient.get<T>(`/${path}`);
+  return response.data;
+}
+
 const findById = async  <T>(path:string, id: any) => {
   const response = await apiClient.get<T>(`/${path}/${id}`);
   return response.data;
@@ -39,6 +45,7 @@ const deleteAll = async (path: string,) => {
 const Client = {
   findAll,
   findById,
+  retrieve,
   create,
   update,
   deleteById,

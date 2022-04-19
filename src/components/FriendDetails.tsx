@@ -7,7 +7,10 @@ import { Friend } from "types";
 export default function FriendDetails() {
   const { friendId } = useParams();
 
-  const { data, isLoading } = useFindById<Friend>("friends", friendId!);
+  const { data, isLoading } = useFindById<Friend>({
+    path: "friends",
+    id: friendId!,
+  });
 
   return isLoading ? (
     <Skeleton width={100} />
