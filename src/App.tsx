@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Friends from "./pages/Friends";
+import Friends from "./pages/Submissions";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "components/AppBar";
 import FriendDetails from "components/FriendDetails";
@@ -21,8 +21,8 @@ function App() {
       <AppBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="friends" element={<Friends />}>
-          <Route path=":friendId" element={<FriendDetails />} />
+        <Route path="submission" element={<Friends />}>
+          <Route path=":submissionId" element={<FriendDetails />} />
         </Route>
       </Routes>
     </>

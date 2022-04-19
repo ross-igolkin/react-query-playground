@@ -1,11 +1,10 @@
 import { QueryKey, UseQueryOptions } from "react-query"
 
- export type ClientUrl = 'friends' | 'user/me'
+ export type ClientUrl = 'friends' | 'user/me' | 'submission'
 
 
  export interface UseClientProps<T> {
     path: ClientUrl, 
-    id: string;
     options?: Omit<UseQueryOptions<T[], Error, T[], QueryKey>, "queryKey" | "queryFn"> 
   }
 
@@ -13,4 +12,9 @@ import { QueryKey, UseQueryOptions } from "react-query"
     path: ClientUrl, 
     id: string;
     options?: Omit<UseQueryOptions<T, Error, T, QueryKey>, "queryKey" | "queryFn">
+  }
+
+  export interface List<T> {
+    count?: number;
+    items?: T[];
   }

@@ -38,7 +38,7 @@ export const useCurrentUser = () => {
 
       return idToken;
     },
-    [getIdTokenClaims, getAccessTokenSilently],
+    [getIdTokenClaims, getAccessTokenSilently, baseUrl],
   );
 
  useRetrieve<LoggedInUser>({path: "user/me", options:{

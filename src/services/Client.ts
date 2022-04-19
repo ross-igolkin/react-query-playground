@@ -1,4 +1,5 @@
 import axios from "axios";
+import { List } from "types";
 
 export const apiClient = axios.create({
   baseURL: "http://localhost:4000",
