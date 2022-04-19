@@ -2,14 +2,13 @@ import axios from "axios";
 import { List } from "types";
 
 export const apiClient = axios.create({
-  baseURL: "http://localhost:4000",
   headers: {
     "Content-type": "application/json",
   },
 });
 
 const findAll = async <T>(path: string) => {
-  const response = await apiClient.get<T[]>(`/${path}`);
+  const response = await apiClient.get<T>(`/${path}`);
   return response.data;
 }
 

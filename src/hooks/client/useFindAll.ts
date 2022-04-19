@@ -2,15 +2,15 @@
 import { useEffect } from "react";
 import {  useQuery } from "react-query";
 import { useDispatch } from "react-redux";
-import {  List, UseClientProps } from "types";
+import {  List, UseClientListProps } from "types";
 import { setIsFetching } from "uiSlice";
 import Client from "../../services/Client";
 
 
-export default function useFindAll <T>({path, options = {}}:UseClientProps<T>) {
+export default function useFindAll <T>({path, options = {}}:UseClientListProps<T>) {
 
     const query = useQuery<
-    T[],
+    List<T>,
     Error
   >(path, () => Client.findAll(path),options);
   const dispatch = useDispatch();

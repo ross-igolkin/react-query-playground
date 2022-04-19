@@ -2,12 +2,12 @@
 import { useEffect } from "react";
 import {  useQuery } from "react-query";
 import { useDispatch } from "react-redux";
-import { UseDynamicClientProps } from "types";
+import { UseClientProps } from "types";
 import { setIsFetching } from "uiSlice";
 import Client from "../../services/Client";
 
 
-export default function useRetrieve <T>({path, options = {}}:Omit<UseDynamicClientProps<T>, 'id'>) {
+export default function useRetrieve <T>({path, options = {}}:Omit<UseClientProps<T>, 'id'>) {
 
     const query = useQuery<
     T,

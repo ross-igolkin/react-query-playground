@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Friends from "./pages/Submissions";
+import SubmissionPage from "./pages/SubmissionPage";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "components/AppBar";
 import FriendDetails from "components/FriendDetails";
@@ -21,7 +21,7 @@ function App() {
       <AppBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="submission" element={<Friends />}>
+        <Route path="submission" element={<SubmissionPage />}>
           <Route path=":submissionId" element={<FriendDetails />} />
         </Route>
       </Routes>

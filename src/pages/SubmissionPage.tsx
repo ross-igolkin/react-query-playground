@@ -1,5 +1,3 @@
-import FriendItem from "../components/FriendItem";
-import { Friend, List } from "types";
 import MuiList from "@mui/material/List";
 import { Outlet } from "react-router-dom";
 import Grid from "@mui/material/Grid";
@@ -9,15 +7,17 @@ import { useFindAll } from "hooks";
 import { Submission } from "types/submission";
 import SubmissionItem from "components/SubmissionItem";
 
-export default function Posts() {
-  const { data, isError, isLoading, error } = useFindAll<Submission>({
-    path: "submission",
-  });
+export default function SubmissionPage() {
+  const { data, isError, isLoading, isFetching, error } =
+    useFindAll<Submission>({
+      path: "submission",
+    });
 
   if (isError) {
     return <div>{error.message}</div>;
   }
 
+  console.log(isLoading, isFetching);
   return (
     <Grid container spacing={2}>
       <Grid item xs={3}>
@@ -31,7 +31,7 @@ export default function Posts() {
                 </ListItemButton>
               ))}
 
-          {data?.map((submission: Submission) => (
+          {data?.items?.map((submission: Submission) => (
             <SubmissionItem key={submission.id} {...submission} />
           ))}
         </MuiList>
