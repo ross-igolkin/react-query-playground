@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import SubmissionPage from "./pages/SubmissionPage";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "components/AppBar";
-import FriendDetails from "components/FriendDetails";
+import SubmissionDetails from "components/SubmissionDetails";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import { useCurrentUser } from "hooks/client/useCurrentUser";
@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="submission" element={<SubmissionPage />}>
-          <Route path=":submissionId" element={<FriendDetails />} />
+          <Route path=":submissionId" element={<SubmissionDetails />} />
         </Route>
       </Routes>
       <ReactQueryDevtools initialIsOpen />

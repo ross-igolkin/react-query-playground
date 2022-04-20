@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
-import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Submission } from "types/submission";
 

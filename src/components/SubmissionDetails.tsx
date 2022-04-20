@@ -4,7 +4,7 @@ import { useFindById } from "hooks";
 import { useParams } from "react-router-dom";
 import { Submission } from "types";
 
-export default function FriendDetails() {
+export default function Details() {
   const { submissionId } = useParams();
 
   const { data, isLoading } = useFindById<Submission>({
