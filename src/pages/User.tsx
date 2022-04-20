@@ -11,7 +11,8 @@ export default function User() {
 
   return (
     <div>
-      {user?.firstName} {user?.lastName}
+      User: {user?.firstName} {user?.lastName}
+      Token:
     </div>
   );
 }
