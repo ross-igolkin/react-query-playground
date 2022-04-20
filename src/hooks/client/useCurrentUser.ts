@@ -11,10 +11,9 @@ export const useCurrentUser = () => {
   const { baseUrl } = config.backend;
   const { pathname } = useLocation();
 
-  const { getIdTokenClaims, isAuthenticated, getAccessTokenSilently, loginWithRedirect } = useAuth0();
+  const { getIdTokenClaims, getAccessTokenSilently, loginWithRedirect } = useAuth0();
 
   const { data: silentToken } = useQuery("silentToken", getAccessTokenSilently, {
-    enabled: !isAuthenticated,
     retry: false,
     onError: () => {
       loginWithRedirect({
