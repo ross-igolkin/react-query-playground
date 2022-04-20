@@ -4,10 +4,12 @@ import { useConfig } from "config";
 import { apiClient } from "services/Client";
 import { useRetrieve } from "./useRetrieve";
 import { useQuery } from "react-query";
+import { useLocation } from "react-router-dom";
 
 export const useCurrentUser = () => {
   const config = useConfig();
   const { baseUrl } = config.backend;
+  const { pathname } = useLocation();
 
   const { getIdTokenClaims, isAuthenticated, getAccessTokenSilently, loginWithRedirect } = useAuth0();
 
@@ -15,7 +17,9 @@ export const useCurrentUser = () => {
     enabled: !isAuthenticated,
     retry: false,
     onError: () => {
-      loginWithRedirect();
+      loginWithRedirect({
+        appState: { returnTo: pathname },
+      });
     },
   });
 

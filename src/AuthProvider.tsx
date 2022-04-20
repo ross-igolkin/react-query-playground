@@ -1,5 +1,5 @@
 import App from "App";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { AppState, Auth0Provider } from "@auth0/auth0-react";
 import { useConfig } from "config";
 import { useNavigate } from "react-router-dom";
 
@@ -13,10 +13,8 @@ function ClientProvider() {
 
   /* On login, change the page address to remove `code` and `state` query string parameters
    */
-  function onRedirectCallback(appState?: { returnTo?: string }): void {
-    const pathname =
-      appState?.returnTo ??
-      `${window.location.pathname}${window.location.hash}`;
+  function onRedirectCallback(appState?: AppState): void {
+    const pathname = appState?.returnTo ?? `${window.location.pathname}${window.location.hash}`;
     navigate(pathname);
   }
 

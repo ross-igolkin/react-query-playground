@@ -6,6 +6,8 @@ import Contact from "pages/Contact";
 import User from "pages/User";
 import { useGetFetchQuery } from "hooks";
 import { LoggedInUser } from "types";
+import { CircularProgress } from "@mui/material";
+import Box from "@mui/material/node_modules/@mui/system/Box";
 export default function Router() {
   const me = useGetFetchQuery("user/me") as LoggedInUser;
 
@@ -18,5 +20,9 @@ export default function Router() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/user" element={<User />} />
     </Routes>
-  ) : null;
+  ) : (
+    <Box height={1} width={1} display="flex" justifyContent="center" alignItems="center">
+      <CircularProgress />
+    </Box>
+  );
 }

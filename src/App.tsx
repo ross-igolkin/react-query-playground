@@ -7,6 +7,8 @@ import { useCurrentUser } from "hooks/client/useCurrentUser";
 import Router from "Router";
 import theme from "themes";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 function App() {
   useCurrentUser();
@@ -14,9 +16,13 @@ function App() {
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <CssBaseline />
-        <AppBar />
-        <Router />
-        <ReactQueryDevtools initialIsOpen />
+        <Stack height="100vh">
+          <AppBar />
+          <Box sx={{ flex: 1 }}>
+            <Router />
+          </Box>
+        </Stack>
+        <ReactQueryDevtools initialIsOpen position="bottom-right" />
       </LocalizationProvider>
     </ThemeProvider>
   );
