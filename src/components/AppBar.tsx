@@ -7,10 +7,12 @@ import Typography from "@mui/material/Typography";
 import { Link as RouterLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AppBar() {
-  const isFetching = useSelector((state: RootState) => state.ui.isFetching);
-  //const isFetching = useIsFetching();
+  const isFetching = useSelector(({ ui }: RootState) => ui.isFetching);
+
+  const { logout } = useAuth0();
 
   return (
     <MuiAppBar position="sticky" elevation={0}>
@@ -31,13 +33,17 @@ export default function AppBar() {
           <Button color="inherit" component={RouterLink} to="/user">
             User
           </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              logout({ returnTo: window.location.origin });
+            }}
+          >
+            Logout
+          </Button>
         </Stack>
       </Toolbar>
-      {isFetching && (
-        <LinearProgress
-          sx={{ position: "absolute", top: 0, left: 0, right: 0 }}
-        />
-      )}
+      {isFetching && <LinearProgress sx={{ position: "absolute", top: 0, left: 0, right: 0 }} />}
     </MuiAppBar>
   );
 }

@@ -1,26 +1,26 @@
-import { IdToken, useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { LoggedInUser } from "types";
 import { useConfig } from "config";
 import { apiClient } from "services/Client";
 import { useRetrieve } from "./useRetrieve";
 import { useQuery } from "react-query";
-import { useState } from "react";
 
 export const useCurrentUser = () => {
   const config = useConfig();
   const { baseUrl } = config.backend;
 
-  const [token, setToken] = useState<IdToken>();
+  const { getIdTokenClaims, isAuthenticated, getAccessTokenSilently, loginWithRedirect } = useAuth0();
 
-  const { getIdTokenClaims, getAccessTokenSilently } = useAuth0();
-
-  const { data: silentToken } = useQuery("silentToken", getAccessTokenSilently);
+  const { data: silentToken } = useQuery("silentToken", getAccessTokenSilently, {
+    enabled: !isAuthenticated,
+    retry: false,
+    onError: () => {
+      loginWithRedirect();
+    },
+  });
 
   const { data: idToken } = useQuery("idToken", () => getIdTokenClaims(), {
     enabled: !!silentToken,
-    onSuccess: (data) => {
-      setToken(data);
-    },
   });
 
   const { data: axiosConfig } = useQuery(
@@ -34,7 +34,7 @@ export const useCurrentUser = () => {
         return config;
       }),
     {
-      enabled: !!token,
+      enabled: !!idToken,
     }
   );
 
