@@ -3,7 +3,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import { useNavigate, useParams } from "react-router-dom";
 import Contact from "types/contact";
 
-export default function ContactItem({ id, firstName }: Contact) {
+interface ContactItemProps extends Contact {
+  index: number;
+}
+
+export default function ContactItem({ index, id, firstName }: ContactItemProps) {
   const { contactId } = useParams();
 
   const navigate = useNavigate();
@@ -15,7 +19,9 @@ export default function ContactItem({ id, firstName }: Contact) {
         navigate(`/contact/${id}`);
       }}
     >
-      <Typography variant="body2">{firstName}</Typography>
+      <Typography variant="body2">
+        {index + 1} {firstName}
+      </Typography>
     </ListItemButton>
   );
 }

@@ -18,9 +18,9 @@ export default function Router() {
       <Route path="/submission" element={<SubmissionPage />}>
         <Route path=":submissionId" element={<SubmissionDetails />} />
       </Route>
-      <Route path="/contact" element={<ContactPage />}>
-        <Route path=":contactId" element={<ContactDetails />} />
-      </Route>
+      <Route path="/contact" element={<ContactPage />} />
+
+      <Route path="/contact/:contactId" element={<ContactDetails />} />
       <Route path="/user" element={<User />} />
     </Routes>
   ) : (
