@@ -29,7 +29,7 @@ export default function SubmissionPage() {
                 </ListItemButton>
               ))}
 
-          {data?.items?.map((submission: Submission) => (
+          {data?.map((submission: Submission) => (
             <SubmissionItem key={submission.id} {...submission} />
           ))}
         </MuiList>
