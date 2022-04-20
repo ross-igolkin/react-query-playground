@@ -4,6 +4,7 @@ import SubmissionPage from "./pages/SubmissionPage";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "components/AppBar";
 import FriendDetails from "components/FriendDetails";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import { useCurrentUser } from "hooks/client/useCurrentUser";
 import { useEffect } from "react";
@@ -25,6 +26,7 @@ function App() {
           <Route path=":submissionId" element={<FriendDetails />} />
         </Route>
       </Routes>
+      <ReactQueryDevtools initialIsOpen />
     </>
   );
 }

@@ -3,17 +3,22 @@ import ReactDOM from "react-dom/client";
 import { store } from "./store";
 import { Provider } from "react-redux";
 import ClientProvider from "ClientProvider";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <ClientProvider />
-      </Provider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <ClientProvider />
+        </BrowserRouter>
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>
 );
