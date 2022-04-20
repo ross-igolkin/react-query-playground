@@ -4,13 +4,13 @@ import SubmissionPage from "./pages/SubmissionPage";
 import SubmissionDetails from "components/SubmissionDetails";
 import ContactPage from "pages/ContactPage";
 import User from "pages/User";
-import { useGetFetchQuery } from "hooks";
+import { useGetQueryData } from "hooks";
 import { LoggedInUser } from "types";
 import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/node_modules/@mui/system/Box";
 import ContactDetails from "components/ContactDetails";
 export default function Router() {
-  const me = useGetFetchQuery<LoggedInUser>("user/me");
+  const me = useGetQueryData<LoggedInUser>("user/me");
 
   return me ? (
     <Routes>

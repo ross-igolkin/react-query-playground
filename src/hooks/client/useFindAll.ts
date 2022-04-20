@@ -6,7 +6,7 @@ import { setIsFetching } from "uiSlice";
 import Client from "../../services/Client";
 
 export function useFindAll<T>({ path, options = {} }: UseClientListProps<T>) {
-  const query = useQuery<T[] | undefined, Error>(path, () => Client.findAll(path), options);
+  const query = useQuery<T[] | undefined, Error>(path, ({ signal }) => Client.findAll(path, { signal }), options);
   const dispatch = useDispatch();
 
   useEffect(() => {

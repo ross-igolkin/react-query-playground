@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { List } from "types";
 
 export const apiClient = axios.create({
@@ -7,18 +7,18 @@ export const apiClient = axios.create({
   },
 });
 
-const findAll = async <T>(path: string) => {
-  const response = await apiClient.get<List<T>>(`/${path}`);
+const findAll = async <T>(path: string, config?: AxiosRequestConfig<any> | undefined) => {
+  const response = await apiClient.get<List<T>>(`/${path}`, config);
   return response.data.items;
 };
 
-const retrieve = async <T>(path: string) => {
-  const response = await apiClient.get<T>(`/${path}`);
+const retrieve = async <T>(path: string, config?: AxiosRequestConfig<any> | undefined) => {
+  const response = await apiClient.get<T>(`/${path}`, config);
   return response.data;
 };
 
-const findById = async <T>(path: string, id: any) => {
-  const response = await apiClient.get<T>(`/${path}/${id}`);
+const findById = async <T>(path: string, id: any, config?: AxiosRequestConfig<any> | undefined) => {
+  const response = await apiClient.get<T>(`/${path}/${id}`, config);
   return response.data;
 };
 /* const findByTitle = async (title: string) => {
