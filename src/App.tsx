@@ -6,17 +6,11 @@ import AppBar from "components/AppBar";
 import SubmissionDetails from "components/SubmissionDetails";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useCurrentUser } from "hooks/client/useCurrentUser";
-import { useEffect } from "react";
 import Contact from "pages/Contact";
 import User from "components/User";
 
 function App() {
-  const { getIdToken } = useCurrentUser();
-
-  useEffect(() => {
-    getIdToken();
-  }, [getIdToken]);
-
+  useCurrentUser();
   return (
     <>
       <CssBaseline />

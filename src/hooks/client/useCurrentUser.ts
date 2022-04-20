@@ -1,33 +1,25 @@
-import { useMemo } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { LoggedInUser } from 'types';
-import { useConfig } from 'config';
-import { apiClient } from 'services/Client';
-import { useRetrieve } from './useRetrieve';
-
+import { IdToken, useAuth0 } from "@auth0/auth0-react";
+import { LoggedInUser } from "types";
+import { useConfig } from "config";
+import { apiClient } from "services/Client";
+import { useRetrieve } from "./useRetrieve";
+import { useQuery } from "react-query";
 
 export const useCurrentUser = () => {
-
   const config = useConfig();
   const { baseUrl } = config.backend;
 
-  const { getIdTokenClaims, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { getIdTokenClaims, getAccessTokenSilently } = useAuth0();
 
+  const { data: silentToken } = useQuery("silentToken", getAccessTokenSilently);
 
-  
-
-  const getIdToken = useMemo(
-    () => async () => {
-      // Make sure the access token is refreshed
-      await getAccessTokenSilently();
-
-      // Get the refreshed id token, that also contains the user email, needed by the server
-      const { __raw: idToken } = await getIdTokenClaims() as {__raw:string};
-
+  const {data: idToken} = useQuery("idToken", () => getIdTokenClaims(), {
+    enabled: !!silentToken,
+    onSuccess: ({ __raw }: IdToken) => {
       apiClient.interceptors.request.use(
         (config) => {
           config.headers = {
-            Authorization:"Bearer " + idToken,
+            Authorization: `Bearer ${__raw}`,
           };
           config.baseURL = baseUrl + "/api/v1";
           return config;
@@ -37,18 +29,13 @@ export const useCurrentUser = () => {
           return Promise.reject(error);
         }
       );
-
-      return idToken;
     },
-    [getIdTokenClaims, getAccessTokenSilently, baseUrl],
-  );
+  });
 
- useRetrieve<LoggedInUser>({path: "user/me", options:{
-      enabled: isAuthenticated,
-  }});
-
-
-  return {
-    getIdToken,
-  } as const;
+  useRetrieve<LoggedInUser>({
+    path: "user/me",
+    options: {
+      enabled: !!idToken,
+    },
+  });
 };
