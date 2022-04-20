@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { store } from "./store";
 import { Provider } from "react-redux";
-import ClientProvider from "ClientProvider";
+import AuthProvider from "AuthProvider";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 
@@ -16,7 +16,7 @@ root.render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <ClientProvider />
+          <AuthProvider />
         </BrowserRouter>
       </QueryClientProvider>
     </Provider>

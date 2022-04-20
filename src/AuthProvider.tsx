@@ -1,5 +1,3 @@
-import { QueryClient } from "react-query";
-
 import App from "App";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { useConfig } from "config";
@@ -29,7 +27,6 @@ function ClientProvider() {
       redirectUri={redirectUri}
       onRedirectCallback={onRedirectCallback}
     >
-      {" "}
       <App />
     </Auth0Provider>
   );
