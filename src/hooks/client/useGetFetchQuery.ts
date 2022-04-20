@@ -1,7 +1,7 @@
-import { useQueryClient } from "react-query";
+import { QueryKey, useQueryClient } from "react-query";
 
-export const useGetFetchQuery = (key: string) => {
+export function useGetFetchQuery<T>(key: QueryKey) {
   const queryClient = useQueryClient();
 
-  return queryClient.getQueryData(key);
-};
+  return queryClient.getQueryData<T>(key);
+}

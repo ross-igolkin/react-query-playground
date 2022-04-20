@@ -2,14 +2,15 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SubmissionPage from "./pages/SubmissionPage";
 import SubmissionDetails from "components/SubmissionDetails";
-import Contact from "pages/Contact";
+import ContactPage from "pages/ContactPage";
 import User from "pages/User";
 import { useGetFetchQuery } from "hooks";
 import { LoggedInUser } from "types";
 import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/node_modules/@mui/system/Box";
+import ContactDetails from "components/ContactDetails";
 export default function Router() {
-  const me = useGetFetchQuery("user/me") as LoggedInUser;
+  const me = useGetFetchQuery<LoggedInUser>("user/me");
 
   return me ? (
     <Routes>
@@ -17,7 +18,9 @@ export default function Router() {
       <Route path="/submission" element={<SubmissionPage />}>
         <Route path=":submissionId" element={<SubmissionDetails />} />
       </Route>
-      <Route path="/contact" element={<Contact />} />
+      <Route path="/contact" element={<ContactPage />}>
+        <Route path=":contactId" element={<ContactDetails />} />
+      </Route>
       <Route path="/user" element={<User />} />
     </Routes>
   ) : (

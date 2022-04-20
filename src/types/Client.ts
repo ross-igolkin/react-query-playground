@@ -1,6 +1,6 @@
 import { QueryKey, UseQueryOptions } from "react-query";
 
-export type ClientUrl = "user/me" | "submission";
+export type ClientUrl = "user/me" | "submission" | "contact";
 
 export interface UseClientProps<T> {
   path: ClientUrl;

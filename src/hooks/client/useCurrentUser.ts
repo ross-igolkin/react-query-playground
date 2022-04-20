@@ -45,6 +45,8 @@ export const useCurrentUser = () => {
     path: "user/me",
     options: {
       enabled: axiosConfig !== undefined,
+      //will not refetch if tab focus return or reconnect to network
+      staleTime: 10 * 1000,
     },
   });
 };
