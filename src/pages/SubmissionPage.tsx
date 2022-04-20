@@ -8,16 +8,14 @@ import { Submission } from "types/submission";
 import SubmissionItem from "components/SubmissionItem";
 
 export default function SubmissionPage() {
-  const { data, isError, isLoading, isFetching, error } =
-    useFindAll<Submission>({
-      path: "submission",
-    });
+  const { data, isError, isLoading, error } = useFindAll<Submission>({
+    path: "submission",
+  });
 
   if (isError) {
     return <div>{error.message}</div>;
   }
 
-  console.log(isLoading, isFetching);
   return (
     <Grid container spacing={2}>
       <Grid item xs={3}>

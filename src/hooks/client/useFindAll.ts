@@ -7,7 +7,7 @@ import { setIsFetching } from "uiSlice";
 import Client from "../../services/Client";
 
 
-export default function useFindAll <T>({path, options = {}}:UseClientListProps<T>) {
+export function useFindAll <T>({path, options = {}}:UseClientListProps<T>) {
 
     const query = useQuery<
     List<T>,

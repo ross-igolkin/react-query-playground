@@ -1,18 +1,20 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { LoggedInUser } from 'types';
 import { useConfig } from 'config';
 import { apiClient } from 'services/Client';
-import useRetrieve from './useRetrieve';
+import { useRetrieve } from './useRetrieve';
 
 
 export const useCurrentUser = () => {
-  const [me, setMe] = useState<LoggedInUser | null>(null);
 
   const config = useConfig();
   const { baseUrl } = config.backend;
 
-  const { getIdTokenClaims, isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { getIdTokenClaims, isAuthenticated, getAccessTokenSilently } = useAuth0();
+
+
+  
 
   const getIdToken = useMemo(
     () => async () => {
@@ -43,18 +45,10 @@ export const useCurrentUser = () => {
 
  useRetrieve<LoggedInUser>({path: "user/me", options:{
       enabled: isAuthenticated,
-      onSuccess: (data)=>{
-        console.log(data)
-        setMe(data);
-      }
   }});
 
 
   return {
-    isAuthenticated,
-    me,
-    setMe,
     getIdToken,
-    auth0UserLoading: isLoading,
   } as const;
 };

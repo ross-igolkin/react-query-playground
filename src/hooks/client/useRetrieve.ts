@@ -7,7 +7,7 @@ import { setIsFetching } from "uiSlice";
 import Client from "../../services/Client";
 
 
-export default function useRetrieve <T>({path, options = {}}:Omit<UseClientProps<T>, 'id'>) {
+export function useRetrieve <T>({path, options = {}}:Omit<UseClientProps<T>, 'id'>) {
 
     const query = useQuery<
     T,

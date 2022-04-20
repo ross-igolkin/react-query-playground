@@ -16,14 +16,20 @@ export default function AppBar() {
     <MuiAppBar position="sticky" elevation={0}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Friends
+          Capitola
         </Typography>
         <Stack direction="row" spacing={2}>
           <Button color="inherit" component={RouterLink} to="/">
             Home
           </Button>
           <Button color="inherit" component={RouterLink} to="/submission">
-            Friends
+            Submissions
+          </Button>
+          <Button color="inherit" component={RouterLink} to="/contact">
+            Contacts
+          </Button>
+          <Button color="inherit" component={RouterLink} to="/user">
+            User
           </Button>
         </Stack>
       </Toolbar>
