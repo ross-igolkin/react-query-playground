@@ -1,18 +1,23 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { IdToken, useAuth0 } from "@auth0/auth0-react";
 import { useGetFetchQuery } from "hooks";
 import React from "react";
 import { LoggedInUser } from "types";
 
 export default function User() {
   const user = useGetFetchQuery("user/me") as LoggedInUser;
-  const auth = useAuth0();
+  const { __raw } = useGetFetchQuery("idToken") as IdToken;
 
-  console.log(auth);
+  const { isLoading } = useAuth0();
+
+  console.log(__raw);
 
   return (
     <div>
       User: {user?.firstName} {user?.lastName}
-      Token:
+      <br />
+      Token: {__raw}
+      <br />
+      Auth0 isLoading: {isLoading.toString()}
     </div>
   );
 }

@@ -1,8 +1,7 @@
 import { useQueryClient } from "react-query";
-import { ClientUrl } from "types";
 
-export const useGetFetchQuery = (key:ClientUrl) => {
-    const queryClient = useQueryClient();
+export const useGetFetchQuery = (key: string) => {
+  const queryClient = useQueryClient();
 
-    return queryClient.getQueryData(key);
+  return queryClient.getQueryData(key);
 };
