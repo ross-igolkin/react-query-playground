@@ -10,7 +10,7 @@ export function useSearch<T>({ path, offset = 0, limit = 0, queryOptions = {}, r
     [path, offset],
     ({ signal }) =>
       Client.search(path, { signal, ...reqOptions, params: { offset, limit: limit, ...reqOptions?.params } }),
-    queryOptions
+    { staleTime: 10 * 1000, ...queryOptions }
   );
   const dispatch = useDispatch();
 
