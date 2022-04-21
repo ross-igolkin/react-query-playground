@@ -12,6 +12,11 @@ const findAll = async <T>(path: string, config?: AxiosRequestConfig<any> | undef
   return response.data.items;
 };
 
+const search = async <T>(path: string, config?: AxiosRequestConfig<any> | undefined) => {
+  const response = await apiClient.get<List<T>>(`/${path}`, config);
+  return response.data;
+};
+
 const retrieve = async <T>(path: string, config?: AxiosRequestConfig<any> | undefined) => {
   const response = await apiClient.get<T>(`/${path}`, config);
   return response.data;
@@ -44,6 +49,7 @@ const deleteAll = async (path: string) => {
 };
 const Client = {
   findAll,
+  search,
   findById,
   retrieve,
   create,

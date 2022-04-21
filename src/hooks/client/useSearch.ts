@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
-import { UseClientArrayProps } from "types";
+import { List, UseClientListProps } from "types";
 import { setIsFetching } from "uiSlice";
 import Client from "../../services/Client";
 
-export function useFindAll<T>({ path, queryOptions = {}, reqOptions }: UseClientArrayProps<T>) {
-  const query = useQuery<T[] | undefined, Error>(
-    path,
-    ({ signal }) => Client.findAll(path, { signal, ...reqOptions }),
+export function useSearch<T>({ path, offset = 0, limit, queryOptions = {}, reqOptions }: UseClientListProps<T>) {
+  const query = useQuery<List<T> | undefined, Error>(
+    [path, offset],
+    ({ signal }) =>
+      Client.search(path, { signal, ...reqOptions, params: { offset, limit: limit, ...reqOptions?.params } }),
     queryOptions
   );
   const dispatch = useDispatch();
