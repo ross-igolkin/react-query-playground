@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
-import Client from "services/Client";
 import { UseClientProps } from "types";
 import { setIsFetching } from "uiSlice";
+import Client from "../../services/Client";
 
-export function useFindById<T>({ path, id, queryOptions = {} }: UseClientProps<T>) {
-  const query = useQuery<T, Error>([path, id], ({ signal }) => Client.findById(path, id, { signal }), queryOptions);
+export function useUpdate<T>({ path, id, queryOptions = {}, reqOptions }: UseClientProps<T>) {
+  const query = useQuery<T, Error>(
+    path,
+    ({ signal }) => Client.update(path, id, { signal, ...reqOptions }),
+    queryOptions
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {

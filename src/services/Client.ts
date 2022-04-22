@@ -35,7 +35,7 @@ const create = async <T>(path: string, options: Omit<T, "id">) => {
   const response = await apiClient.post<any>(`/${path}`, { ...options });
   return response.data;
 };
-const update = async <T>(path: string, id: any, options: T) => {
+const update = async <T>(path: string, id: any, options: Partial<T>) => {
   const response = await apiClient.put<any>(`/${path}/${id}`, { ...options });
   return response.data;
 };

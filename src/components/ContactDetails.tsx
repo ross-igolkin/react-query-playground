@@ -14,7 +14,7 @@ export default function ContactDetails() {
   const { data, isLoading } = useFindById<Contact>({
     path: "contact",
     id: contactId!,
-    options: {
+    queryOptions: {
       initialData: () => {
         if (initData) {
           return { ...initData };

@@ -6,7 +6,7 @@ export type ClientUrl = "user/me" | "submission" | "contact";
 export interface UseClientProps<T> {
   path: ClientUrl;
   id: string;
-  options?: Omit<UseQueryOptions<T, Error, T, QueryKey>, "queryKey" | "queryFn">;
+  queryOptions?: Omit<UseQueryOptions<T, Error, T, QueryKey>, "queryKey" | "queryFn">;
   reqOptions?: AxiosRequestConfig<any> | undefined;
 }
 

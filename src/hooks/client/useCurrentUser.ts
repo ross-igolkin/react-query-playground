@@ -43,7 +43,7 @@ export const useCurrentUser = () => {
 
   useRetrieve<LoggedInUser>({
     path: "user/me",
-    options: {
+    queryOptions: {
       enabled: axiosConfig !== undefined,
       //will not refetch if tab focus return or reconnect to network
       staleTime: 10 * 1000,
