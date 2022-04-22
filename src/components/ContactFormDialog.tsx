@@ -35,20 +35,11 @@ export default function ContactFormDialog() {
     }
   );
 
-  const initData = useGetQueryData<Contact[]>("contact")?.find((contact) => contact.id === contactId);
-
   const { data, isLoading } = useFindById<Contact>({
     path: "contact",
     id: contactId!,
     queryOptions: {
       staleTime: 10000,
-      initialData: () => {
-        if (initData) {
-          return { ...initData };
-        } else {
-          return undefined;
-        }
-      },
     },
   });
 
