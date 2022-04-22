@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Link as RouterLink, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -23,16 +23,16 @@ export default function AppBar() {
             Capitola
           </Typography>
           <Stack direction="row" spacing={2}>
-            <Button color="inherit" component={RouterLink} to="/">
+            <Button color="inherit" component={Link} to="/">
               Home
             </Button>
-            <Button color="inherit" component={RouterLink} to="/submission/1">
+            <Button color="inherit" component={Link} to="/submission/1">
               Submissions
             </Button>
-            <Button color="inherit" component={RouterLink} to="/contact">
+            <Button color="inherit" component={Link} to="/contact">
               Contacts
             </Button>
-            <Button color="inherit" component={RouterLink} to="/user">
+            <Button color="inherit" component={Link} to="/user">
               User
             </Button>
             <Button

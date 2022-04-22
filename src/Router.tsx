@@ -11,10 +11,13 @@ import Box from "@mui/material/node_modules/@mui/system/Box";
 import ContactDetails from "components/ContactDetails";
 import ContactFormDialog from "components/ContactFormDialog";
 import AppBar from "components/AppBar";
+import NoMatch from "pages/NoMatch";
 export default function Router() {
   const me = useGetQueryData<LoggedInUser>("user/me");
 
   const location = useLocation();
+
+  console.log(location);
 
   const state = location.state as { backgroundLocation?: Location };
 
@@ -29,6 +32,7 @@ export default function Router() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/contact/:contactId" element={<ContactDetails />} />
           <Route path="/user" element={<User />} />
+          <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>
       {/* Show the modal when a `backgroundLocation` is set */}

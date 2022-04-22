@@ -2,7 +2,7 @@ import { Box, Skeleton } from "@mui/material";
 import { useFindById, useGetQueryData } from "hooks";
 import { useLocation, useParams } from "react-router-dom";
 import Contact from "types/contact";
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 
 export default function ContactDetails() {
@@ -31,7 +31,7 @@ export default function ContactDetails() {
       {data?.firstName} {data?.lastName}
       <Button
         color="inherit"
-        component={RouterLink}
+        component={Link}
         to={`/contact/${contactId}/edit`}
         state={{ backgroundLocation: location }}
       >
