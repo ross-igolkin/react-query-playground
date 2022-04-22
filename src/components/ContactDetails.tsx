@@ -15,6 +15,7 @@ export default function ContactDetails() {
     path: "contact",
     id: contactId!,
     queryOptions: {
+      staleTime: 10000,
       initialData: () => {
         if (initData) {
           return { ...initData };

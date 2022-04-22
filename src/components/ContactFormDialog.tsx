@@ -6,12 +6,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useGetQueryData } from "hooks";
+import { useFindById, useGetQueryData } from "hooks";
 import Contact from "types/contact";
-import { useMutation, UseMutationResult } from "react-query";
+import { useMutation } from "react-query";
 import Client from "services/Client";
 import { LoggedInUser } from "types";
 import { ContactRole } from "enums";
+import { LinearProgress } from "@mui/material";
 
 interface Inputs {
   firstName: string;
@@ -35,6 +36,21 @@ export default function ContactFormDialog() {
   );
 
   const initData = useGetQueryData<Contact[]>("contact")?.find((contact) => contact.id === contactId);
+
+  const { data, isLoading } = useFindById<Contact>({
+    path: "contact",
+    id: contactId!,
+    queryOptions: {
+      staleTime: 10000,
+      initialData: () => {
+        if (initData) {
+          return { ...initData };
+        } else {
+          return undefined;
+        }
+      },
+    },
+  });
 
   const user = useGetQueryData<LoggedInUser>("user/me");
 
@@ -78,10 +94,10 @@ export default function ContactFormDialog() {
       <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
-          <input defaultValue={initData?.firstName} {...register("firstName")} />
-          <input defaultValue={initData?.lastName} {...register("lastName")} />
-          <input defaultValue={initData?.email} {...register("email")} />
-          <input defaultValue={initData?.phoneNumber} {...register("phoneNumber")} />
+          <input defaultValue={data?.firstName} {...register("firstName")} />
+          <input defaultValue={data?.lastName} {...register("lastName")} />
+          <input defaultValue={data?.email} {...register("email")} />
+          <input defaultValue={data?.phoneNumber} {...register("phoneNumber")} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Disagree</Button>
@@ -89,6 +105,7 @@ export default function ContactFormDialog() {
             Agree
           </Button>
         </DialogActions>
+        {isLoading && <LinearProgress />}
       </form>
     </Dialog>
   );

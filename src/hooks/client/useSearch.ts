@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useQuery, QueryClient, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
 import { List, UseClientListProps } from "types";
 import { setIsFetching } from "uiSlice";
