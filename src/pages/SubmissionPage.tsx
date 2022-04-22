@@ -7,6 +7,7 @@ import { useSearch } from "hooks";
 import { Submission } from "types/submission";
 import SubmissionItem from "components/SubmissionItem";
 import Pagination from "@mui/material/Pagination";
+import { useEffect } from "react";
 
 const pageLimit = 6;
 
@@ -25,6 +26,12 @@ export default function SubmissionPage() {
       keepPreviousData: true,
     },
   });
+
+  useEffect(() => {
+    if (data?.items && data.items.length === 0) {
+      navigate(`/submission/1`);
+    }
+  }, [data]);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     navigate(`/submission/${value}`);
