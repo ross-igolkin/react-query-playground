@@ -1,12 +1,13 @@
 import { Box, Skeleton } from "@mui/material";
 import { useFindById, useGetQueryData } from "hooks";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Contact from "types/contact";
 import { Link as RouterLink } from "react-router-dom";
 import Button from "@mui/material/Button";
 
 export default function ContactDetails() {
   const { contactId } = useParams();
+  let location = useLocation();
 
   const initData = useGetQueryData<Contact[]>("contact")?.find((contact) => contact.id === contactId);
 
@@ -32,7 +33,7 @@ export default function ContactDetails() {
         color="inherit"
         component={RouterLink}
         to={`/contact/${contactId}/edit`}
-        state={{ backgroundLocation: true }}
+        state={{ backgroundLocation: location }}
       >
         Edit Contact
       </Button>

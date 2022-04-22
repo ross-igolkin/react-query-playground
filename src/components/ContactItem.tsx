@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Contact from "types/contact";
 
 interface ContactItemProps extends Contact {
