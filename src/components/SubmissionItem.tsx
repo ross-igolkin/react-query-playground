@@ -12,7 +12,7 @@ export default function SubmissionItem({ id, insuredName }: Submission) {
     <ListItemButton
       selected={submissionId === id}
       onClick={() => {
-        navigate(`/submission/${id}`);
+        navigate(`${id}`);
       }}
     >
       <Typography variant="body2">{insuredName}</Typography>

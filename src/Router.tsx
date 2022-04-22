@@ -15,7 +15,7 @@ export default function Router() {
   return me ? (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/submission" element={<SubmissionPage />}>
+      <Route path="/submission/:paginationNumber" element={<SubmissionPage />}>
         <Route path=":submissionId" element={<SubmissionDetails />} />
       </Route>
       <Route path="/contact" element={<ContactPage />} />

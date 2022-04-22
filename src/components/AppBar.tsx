@@ -24,7 +24,7 @@ export default function AppBar() {
           <Button color="inherit" component={RouterLink} to="/">
             Home
           </Button>
-          <Button color="inherit" component={RouterLink} to="/submission">
+          <Button color="inherit" component={RouterLink} to="/submission/1">
             Submissions
           </Button>
           <Button color="inherit" component={RouterLink} to="/contact">

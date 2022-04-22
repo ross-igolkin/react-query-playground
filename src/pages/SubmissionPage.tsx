@@ -1,18 +1,22 @@
 import MuiList from "@mui/material/List";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 import ListItemButton from "@mui/material/ListItemButton";
 import { useSearch } from "hooks";
 import { Submission } from "types/submission";
 import SubmissionItem from "components/SubmissionItem";
-import { useState } from "react";
 import Pagination from "@mui/material/Pagination";
 
 const pageLimit = 6;
 
 export default function SubmissionPage() {
-  const [submissionPage, setSubmissionPage] = useState(1);
+  const { paginationNumber } = useParams();
+
+  const submissionPage = parseInt(paginationNumber || "1");
+
+  const navigate = useNavigate();
+
   const { data, isError, isLoading, error } = useSearch<Submission>({
     path: "submission",
     offset: (submissionPage - 1) * pageLimit,
@@ -23,7 +27,7 @@ export default function SubmissionPage() {
   });
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setSubmissionPage(value);
+    navigate(`/submission/${value}`);
   };
 
   if (isError) {
