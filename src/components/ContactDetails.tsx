@@ -2,6 +2,8 @@ import { Box, Skeleton } from "@mui/material";
 import { useFindById, useGetQueryData } from "hooks";
 import { useParams } from "react-router-dom";
 import Contact from "types/contact";
+import { Link as RouterLink } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 export default function ContactDetails() {
   const { contactId } = useParams();
@@ -26,6 +28,14 @@ export default function ContactDetails() {
   ) : (
     <Box>
       {data?.firstName} {data?.lastName}
+      <Button
+        color="inherit"
+        component={RouterLink}
+        to={`/contact/${contactId}/edit`}
+        state={{ backgroundLocation: true }}
+      >
+        Edit Contact
+      </Button>
     </Box>
   );
 }

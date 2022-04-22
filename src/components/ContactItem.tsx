@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Contact from "types/contact";
 
 interface ContactItemProps extends Contact {
@@ -8,13 +8,10 @@ interface ContactItemProps extends Contact {
 }
 
 export default function ContactItem({ index, id, firstName }: ContactItemProps) {
-  const { contactId } = useParams();
-
   const navigate = useNavigate();
 
   return (
     <ListItemButton
-      selected={contactId === id}
       onClick={() => {
         navigate(`/contact/${id}`);
       }}

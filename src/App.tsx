@@ -17,10 +17,7 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <CssBaseline />
         <Stack height="100vh">
-          <AppBar />
-          <Box sx={{ flex: 1 }}>
-            <Router />
-          </Box>
+          <Router />
         </Stack>
         <ReactQueryDevtools initialIsOpen position="bottom-right" />
       </LocalizationProvider>
