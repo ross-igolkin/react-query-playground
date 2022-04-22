@@ -18,12 +18,15 @@ export function useSearch<T>({ path, offset = 0, limit = 0, queryOptions = {}, r
 
   const prefetchSearch = async () => {
     // The results of this query will be cached like a normal query
-    await queryClient.prefetchQuery([path, offset + limit], ({ signal }) =>
-      Client.search(path, {
-        signal,
-        ...reqOptions,
-        params: { offset: offset + limit, limit: limit, ...reqOptions?.params },
-      })
+    await queryClient.prefetchQuery(
+      [path, offset + limit],
+      ({ signal }) =>
+        Client.search(path, {
+          signal,
+          ...reqOptions,
+          params: { offset: offset + limit, limit: limit, ...reqOptions?.params },
+        }),
+      { staleTime: 10 * 1000 }
     );
   };
 
