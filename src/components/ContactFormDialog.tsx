@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useFindById, useGetQueryData } from "hooks";
 import Contact from "types/contact";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import Client from "services/Client";
 import { LoggedInUser } from "types";
 import { ContactRole } from "enums";
@@ -25,12 +25,17 @@ export default function ContactFormDialog() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { contactId } = useParams();
+  const queryClient = useQueryClient();
 
   const mutation = useMutation<Partial<Contact>, Error, Partial<Contact>, undefined>(
-    (newTodo) => Client.update("contact", contactId, newTodo),
+    (newTodo) => Client.create("contact", newTodo),
     {
       onSuccess: (data, variables, context) => {
-        // Boom baby!
+        queryClient.prefetchQuery("contact", ({ signal }) =>
+          Client.findAll("contact", {
+            signal,
+          })
+        );
       },
     }
   );
