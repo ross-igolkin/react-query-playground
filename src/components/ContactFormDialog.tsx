@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useFindById, useGetQueryData } from "hooks";
 import Contact from "types/contact";
-import { useMutation, useQueryClient } from "react-query";
+import { QueryKey, useMutation, useQueryClient } from "react-query";
 import Client from "services/Client";
 import { LoggedInUser } from "types";
 import { ContactRole } from "enums";
@@ -31,11 +31,15 @@ export default function ContactFormDialog() {
     (newTodo) => Client.create("contact", newTodo),
     {
       onSuccess: (data, variables, context) => {
-        queryClient.prefetchQuery("contact", ({ signal }) =>
+        /* queryClient.prefetchQuery("contact", ({ signal }) =>
           Client.findAll("contact", {
             signal,
           })
-        );
+        ); */
+
+        queryClient.setQueryData<Partial<Contact>[] | undefined>("contact", (oldQueryData) => {
+          return oldQueryData && [...oldQueryData, data];
+        });
       },
     }
   );
